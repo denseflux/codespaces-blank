@@ -1,0 +1,92 @@
+@prefix cpsv: <http://purl.org/vocab/cpsv#> .
+@prefix cv: <http://data.europa.eu/m8g/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.com/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:cheg dcterms:description "Check how to Export Goods"@en ;
+	cv:hasCompetentAuthority ex:DBT ;
+	dcterms:identifier "CHEG" ;
+	dcterms:title "Check how to import or export goods"@en ;
+    cv:thematicArea ex:Export ;
+	cv:thematicArea ex:Import ;
+	cv:hasChannel ex:assistedDigital ;
+	cv:hasChannel ex:GOVukService ;
+	cv:addressee ex:userGroup1 ;
+	a cpsv:PublicService .
+
+ex:dbt dcterms:title "Department for Business and Trade"@en;
+	dcterms:identifier "DBT" ;
+	a cv:PublicOrganisation .
+
+ex:chegdata dcterms:title "Data relating to import or export of goods"@en ;
+	dcterms:identifier "CHEG-DATA" ;
+    cv:landingPage "https://www.gov.uk/check-how-to-import-export" ;
+    cv:publisher ex:mendel ;
+	a cv:Dataset .
+
+ex:mendel dcterms:title "Mendel" ;
+    a foaf:Agent .
+
+ex:govukservice dcterms:type <http://data.europa.eu/snb/com-channel/b37115f83e> ;
+	dcterms:identifier "service.gov.uk" ;
+	a cv:Channel .
+
+ex:assisteddigital cv:openingHours ex:workDay ;
+    cv:identifier "assisted" ;
+    dcterms:description "Assisted Digital" ;
+	cv:specialOpeningHoursSpecification ex:workWeek ;
+	cv:telephone "+44 204 551 0011" ;
+	a cv:Channel .
+
+ex:workday cv:frequency <http://publications.europa.eu/resource/authority/frequency/DAILY> ;
+	dcterms:description "9am to 5 pm"@en ;
+	time:hasBeginning [
+		time:inDateTime [
+			time:hour 9 ;
+			time:minute 0 ;
+			time:unitType time:unitMinute ;
+			a time:DateTimeDescription ;
+		] ;
+		a time:Instant ;
+	] ;
+	time:hasEnd [
+		time:inDateTime [
+			time:hour 17 ;
+			time:minute 0 ;
+			time:unitType time:unitMinute ;
+			a time:DateTimeDescription ;
+		] ;
+		a time:Instant ;
+	] ;
+	a time:TemporalEntity .
+
+ex:workweek cv:frequency <http://publications.europa.eu/resource/authority/frequency/WEEKLY> ;
+	dcterms:description "Monday to Friday"@en ;
+	time:hasBeginning [
+		time:inDateTime [
+			time:dayOfWeek time:Saturday ;
+			a time:DateTimeDescription ;
+		] ;
+		a time:Instant ;
+	] ;
+	time:hasEnd [
+		time:inDateTime [
+			time:dayOfWeek time:Sunday ;
+			a time:DateTimeDescription ;
+		] ;
+		a time:Instant ;
+	] ;
+	a time:TemporalEntity .
+
+ex:export a skos:Concept .
+ex:import a skos:Concept .
+
+ex:usergroup1 dcterms:title "An example user group" ;
+	a skos:Concept .
